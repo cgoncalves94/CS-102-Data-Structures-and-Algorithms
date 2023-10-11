@@ -3,140 +3,124 @@
         "name": "Le Meurice",
         "cuisine": "French",
         "location": "Paris, France",
-        "rating": 4.8,
-        "reviews": []
+        "rating": 3.0,
+        "reviews": [
+            {
+                "rating": 3.0,
+                "text": "It was okay, but I've had better."
+            }
+        ]
     },
     "2": {
         "name": "Osteria Francescana",
         "cuisine": "Italian",
         "location": "Modena, Italy",
-        "rating": 4.9,
-        "reviews": []
+        "rating": 5.0,
+        "reviews": [
+            {
+                "rating": 5.0,
+                "text": "Absolutely stunning! A must-visit."
+            }
+        ]
     },
     "3": {
         "name": "El Celler de Can Roca",
         "cuisine": "Spanish",
         "location": "Girona, Spain",
-        "rating": 4.7,
-        "reviews": []
+        "rating": 4.2,
+        "reviews": [
+            {
+                "rating": 4.2,
+                "text": "Great food but service could be better."
+            }
+        ]
     },
     "4": {
         "name": "The Fat Duck",
         "cuisine": "British",
         "location": "Bray, United Kingdom",
-        "rating": 4.5,
-        "reviews": []
+        "rating": 3.9,
+        "reviews": [
+            {
+                "rating": 4.8,
+                "text": "Fantastic from start to finish."
+            },
+            {
+                "rating": 3.0,
+                "text": "English food a bit tasteless"
+            }
+        ]
     },
     "5": {
         "name": "Steirereck",
         "cuisine": "Austrian",
         "location": "Vienna, Austria",
-        "rating": 4.6,
-        "reviews": []
+        "rating": 4.5,
+        "reviews": [
+            {
+                "rating": 4.5,
+                "text": "Amazing experience, will definitely return!"
+            }
+        ]
     },
     "6": {
         "name": "Noma",
         "cuisine": "Nordic",
         "location": "Copenhagen, Denmark",
-        "rating": 4.8,
-        "reviews": []
+        "rating": 3.5,
+        "reviews": [
+            {
+                "rating": 3.0,
+                "text": "It was okay, but I've had better."
+            }
+        ]
     },
     "7": {
         "name": "Restaurante Tim Raue",
         "cuisine": "German",
         "location": "Berlin, Germany",
-        "rating": 4.4,
-        "reviews": []
+        "rating": 5.0,
+        "reviews": [
+            {
+                "rating": 5.0,
+                "text": "Absolutely stunning! A must-visit."
+            }
+        ]
     },
     "8": {
         "name": "De Librije",
         "cuisine": "Dutch",
         "location": "Zwolle, Netherlands",
-        "rating": 4.7,
-        "reviews": []
+        "rating": 4.2,
+        "reviews": [
+            {
+                "rating": 4.2,
+                "text": "Great food but service could be better."
+            }
+        ]
     },
     "9": {
         "name": "Maaemo",
         "cuisine": "Norwegian",
         "location": "Oslo, Norway",
-        "rating": 4.9,
-        "reviews": []
+        "rating": 4.8,
+        "reviews": [
+            {
+                "rating": 4.8,
+                "text": "Fantastic from start to finish."
+            }
+        ]
     },
     "10": {
         "name": "Frantz\u00e9n",
         "cuisine": "Swedish",
         "location": "Stockholm, Sweden",
-        "rating": 4.8,
-        "reviews": []
-    },
-    "11": {
-        "name": "Alain Ducasse au Plaza Ath\u00e9n\u00e9e",
-        "cuisine": "French",
-        "location": "Paris, France",
-        "rating": 4.6,
-        "reviews": []
-    },
-    "12": {
-        "name": "Amador",
-        "cuisine": "Spanish",
-        "location": "Vienna, Austria",
         "rating": 4.5,
-        "reviews": []
-    },
-    "13": {
-        "name": "Geranium",
-        "cuisine": "Danish",
-        "location": "Copenhagen, Denmark",
-        "rating": 4.7,
-        "reviews": []
-    },
-    "14": {
-        "name": "Arzak",
-        "cuisine": "Basque",
-        "location": "San Sebasti\u00e1n, Spain",
-        "rating": 4.6,
-        "reviews": []
-    },
-    "15": {
-        "name": "Disfrutar",
-        "cuisine": "Mediterranean",
-        "location": "Barcelona, Spain",
-        "rating": 4.8,
-        "reviews": []
-    },
-    "16": {
-        "name": "Piazza Duomo",
-        "cuisine": "Italian",
-        "location": "Alba, Italy",
-        "rating": 4.7,
-        "reviews": []
-    },
-    "17": {
-        "name": "Vila Joya",
-        "cuisine": "Portuguese",
-        "location": "Albufeira, Portugal",
-        "rating": 4.6,
-        "reviews": []
-    },
-    "18": {
-        "name": "L'Enclume",
-        "cuisine": "British",
-        "location": "Cartmel, United Kingdom",
-        "rating": 4.7,
-        "reviews": []
-    },
-    "19": {
-        "name": "Alinea",
-        "cuisine": "American",
-        "location": "Chicago, USA",
-        "rating": 4.5,
-        "reviews": []
-    },
-    "20": {
-        "name": "Etxebarri",
-        "cuisine": "Spanish",
-        "location": "Axpe, Spain",
-        "rating": 4.8,
-        "reviews": []
+        "reviews": [
+            {
+                "rating": 4.5,
+                "text": "Amazing experience, will definitely return!"
+            }
+        ]
     }
 }

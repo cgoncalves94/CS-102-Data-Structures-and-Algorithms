@@ -1,99 +1,137 @@
-import json
-import os
+from utils import sanitize_text, compare_by, display_restaurants, load_and_convert_data_to_list, update_average_rating, update_restaurant_data, save_to_json
 from sorts import quicksort
 
-current_dir = os.path.dirname(os.path.abspath(__file__))
-data_file_path = os.path.join(current_dir, 'restaurant_data.json')
-
-# Load restaurant data from JSON file into a dictionary
-with open(data_file_path, 'r') as file:
-    restaurant_data = json.load(file)
-    
-# Convert restaurant data to a list for easier sorting and searching
-restaurant_list = list(restaurant_data.values())
 
 def main_menu():
-    # Display the main menu and capture user choice
+    """Display the main menu and handle user input."""
+
     while True:
+        # Print the available options
         print("Welcome to the Restaurant Recommendation Engine!")
-        print("Please choose an option:")
         print("1. View Recommendations")
-        print("2. Add Review")
-        print("3. Search")
+        print("2. Add a Review")
+        print("3. Search Restaurants")
         print("4. Exit")
-        choice = input("Your choice: ")
-        
-        if choice in ["1", "2", "3", "4"]:
-            break  # Exit the loop if a valid option is chosen
-        else:
-            print("Invalid choice. Please try again.")
-        
-    if choice == "1":
-        # Option to view restaurant recommendations
-        view_recommendations()
-    elif choice == "2":
-        # Option to add a restaurant review
-        add_review()
-    elif choice == "3":
-        # Option to search a restaurants based on a filter
-        search_restaurants()
-    elif choice == "4":
-        # Exit application
-        exit_app()
 
-# Function to compare two restaurants based on a given criteria (e.g., rating, cuisine, location)
-def compare_by(restaurant1, restaurant2, criteria):
-    return restaurant1[criteria] > restaurant2[criteria]
-
-# Function to display a list of restaurants in a readable format
-# Enumerate through the list of restaurants and print details for each
-def display_restaurants(restaurants):
-    for i, restaurant in enumerate(restaurants, 1):
-        print(f"{i}. {restaurant['name']} ({restaurant['cuisine']})")
-        print(f"   Location: {restaurant['location']}")
-        print(f"   Rating: {restaurant['rating']}")
-        print("   ---")
-
+        # Capture the user's choice and validate it
+        try:
+            choice = int(input("Your choice: ")) # Capture user choice for menu option.
+            if choice in [1, 2, 3, 4]:
+                # Process the user's choice
+                if choice == 1:
+                    view_recommendations()
+                elif choice == 2:
+                    add_review()
+                elif choice == 3:
+                    search_restaurants()
+                else:
+                    print("Thank you for using the Restaurant Recommendation Engine. Goodbye!")
+                    exit()
+                break
+            else:
+                print("\nInvalid choice. Please try again.")
+        except ValueError:
+            print("\nPlease enter a valid number.")
 
 def view_recommendations():
+    """Display recommendations based on selected criteria."""
+
+    # Map user choice to sorting criteria
+    criteria_map = {
+        1: "rating",
+        2: "cuisine",
+        3: "location"
+    }
     while True:
-        print("Choose the basis for sorting:")
+        # Present sorting options to the user
+        print("Choose the basis for recommendations:")
         print("1. By Rating")
         print("2. By Cuisine")
         print("3. By Location")
-        choice = input("Your choice: ")
+        try:
+            # Capture and validate user choice
+            choice = int(input("Your choice: "))
+            if choice in criteria_map.keys():
+                # Determine the criterion for sorting
+                criterion = criteria_map[choice]
 
-        if choice in ["1", "2", "3"]:
-            break  # Exit the loop if a valid option is chosen
-        else:
-            print("Invalid choice. Please try again.")
-    
-    if choice == "1":
-        # Sort by rating 
-        sorted_by_rating = quicksort(restaurant_list, 0, len(restaurant_list) - 1, lambda x, y: not compare_by(x, y, "rating"))
-        print("Top restaurants by rating:")
-        print(display_restaurants(sorted_by_rating))
+                # Define comparison function with 'criterion' as a default argument
+                def comparison_function(x, y, criterion=criterion):
+                    if criterion == "rating":
+                        return not compare_by(x, y, criterion)
+                    return compare_by(x, y, criterion)
+
+                # Sort the restaurant list based on the chosen criterion.   
+                sorted_list = quicksort(restaurant_list, 0, len(restaurant_list) - 1, comparison_function)
+
+                # Display sorted list
+                print(f"Top restaurants by {criterion}:")
+                display_restaurants(sorted_list) # Display the sorted list of restaurants
+                post_recommendation_menu()
+                break
+            else:
+                print("\nInvalid choice. Please try again.")
+        except ValueError:
+            print("\nPlease enter a valid number.")
+
+def post_recommendation_menu():
+    """Handle post-recommendation actions like going back to the main menu or adding a review."""
+
+    while True:
+        print("What would you like to do next?")
+        print("1. Go back to main menu")
+        print("2. Add a review for a listed restaurant")
+        print("3. Exit")
         
-    elif choice == "2":
-        # Sort by cuisine alphabetically 
-        sorted_by_cuisine = quicksort(restaurant_list, 0, len(restaurant_list) - 1, lambda x, y: compare_by(x, y, "cuisine"))
-        print("Top restaurants by cuisine:")
-        print(display_restaurants(sorted_by_cuisine))
-        
-    elif choice == "3":
-        # Sort by location alphabetically 
-        sorted_by_location = quicksort(restaurant_list, 0, len(restaurant_list) - 1, lambda x, y: compare_by(x, y, "location"))
-        print("Top restaurants by ocation:")
-        print(display_restaurants(sorted_by_location))
-
-
+        try:
+            choice = int(input("Your choice: "))
+            
+            if choice == 1:
+                # Call the function that displays the main menu
+                main_menu()
+                break
+            elif choice == 2:
+                # Call the function to add a review
+                add_review()
+                break
+            elif choice == 3:
+                print("Thank you for using the Restaurant Recommendation Engine. Goodbye!")
+                exit()
+            else:
+                print("\nInvalid choice. Please try again.")
+        except ValueError:
+            print("\nPlease enter a valid number.")
 
 def add_review():
-    '''
-    Enable users to add reviews for restaurants.
-    Update the restaurant's rating based on the new review.
-    '''
-    pass
+    """Add a review to a selected restaurant and update its rating."""
+
+    while True:  # Loop to keep asking for a valid restaurant choice
+        try:
+            choice = int(input("Choose a restaurant to review: ")) # Capture the user's choice for the restaurant to review.
+            if 1 <= choice <= len(restaurant_list):
+                restaurant = restaurant_list[choice - 1]
+                break  # Exit the loop as a valid restaurant has been chosen
+            else:
+                print("\nInvalid choice.")
+        except ValueError:
+            print("\nPlease enter a valid number.")
+    try:
+        rating = float(input("Your rating (1-5): ")) # Capture the user's rating.
+        if 1 <= rating <= 5:
+            review_text = input("Your review: ")
+            sanitized_review = sanitize_text(review_text)
+            new_review = {"rating": rating, "text": sanitized_review}
+            restaurant['reviews'].append(new_review)
+        else:
+            print("\nInvalid rating. Must be between 1 and 5.")
+            return
+    except ValueError:
+        print("\nPlease enter a valid rating.")
+        return
+
+    restaurant['rating'] = update_average_rating(restaurant)
+    update_restaurant_data(restaurant, restaurant_data)
+    save_to_json(restaurant_data, data_file_path)  # Save the updated data back to JSON file
 
 def search_restaurants():
     '''
@@ -103,9 +141,11 @@ def search_restaurants():
     '''
     pass
 
-def exit_app():
-    #exit
-    pass
 
+if __name__ == "__main__":
+    restaurant_list, restaurant_data, data_file_path = load_and_convert_data_to_list()
 
-main_menu()
+    if restaurant_list:
+        main_menu()
+    else:
+        print("Program terminated due to data loading failure.")
