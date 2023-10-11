@@ -18,3 +18,4 @@ def quicksort(list, start, end, comparison_function):
     list[end], list[less_than_pointer] = list[less_than_pointer], list[end]
     quicksort(list, start, less_than_pointer - 1, comparison_function)
     quicksort(list, less_than_pointer + 1, end, comparison_function)
+    return list
