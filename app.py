@@ -1,4 +1,4 @@
-from utils import sanitize_text, compare_by, display_restaurants, load_and_convert_data_to_list, update_average_rating, update_restaurant_data, save_to_json
+from utils import get_valid_choice, capture_and_add_review, handle_cuisine_search, compare_by, display_restaurants, load_and_convert_data_to_list, update_restaurant_data, save_to_json
 from sorts import quicksort
 
 
@@ -7,26 +7,27 @@ def main_menu():
 
     while True:
         # Print the available options
-        print("Welcome to the Restaurant Recommendation Engine!")
+        print("\nWelcome to the Restaurant Recommendation Engine!")
         print("1. View Recommendations")
         print("2. Add a Review")
         print("3. Search Restaurants")
         print("4. Exit")
 
         # Capture the user's choice and validate it
-        try:
+        try: # Using try-except to validate user input is a number
             choice = int(input("Your choice: ")) # Capture user choice for menu option.
             if choice in [1, 2, 3, 4]:
                 # Process the user's choice
-                if choice == 1:
+                if choice == 1: # If choice is 1, view restaurant recommendations
                     view_recommendations()
-                elif choice == 2:
+                elif choice == 2: # If choice is 2, add review
                     add_review()
-                elif choice == 3:
-                    search_restaurants()
+                elif choice == 3: # If choice is 3, search restaurants
+                    search_menu()
                 else:
                     print("Thank you for using the Restaurant Recommendation Engine. Goodbye!")
-                    exit()
+                    exit() # Exit the application
+
                 break
             else:
                 print("\nInvalid choice. Please try again.")
@@ -44,7 +45,7 @@ def view_recommendations():
     }
     while True:
         # Present sorting options to the user
-        print("Choose the basis for recommendations:")
+        print("\nChoose the basis for recommendations:")
         print("1. By Rating")
         print("2. By Cuisine")
         print("3. By Location")
@@ -65,16 +66,16 @@ def view_recommendations():
                 sorted_list = quicksort(restaurant_list, 0, len(restaurant_list) - 1, comparison_function)
 
                 # Display sorted list
-                print(f"Top restaurants by {criterion}:")
+                print(f"\nTop restaurants by {criterion}:")
                 display_restaurants(sorted_list) # Display the sorted list of restaurants
-                post_recommendation_menu()
+                post_menu()
                 break
             else:
                 print("\nInvalid choice. Please try again.")
         except ValueError:
             print("\nPlease enter a valid number.")
 
-def post_recommendation_menu():
+def post_menu(restaurants_to_review=None):
     """Handle post-recommendation actions like going back to the main menu or adding a review."""
 
     while True:
@@ -92,7 +93,7 @@ def post_recommendation_menu():
                 break
             elif choice == 2:
                 # Call the function to add a review
-                add_review()
+                add_review(restaurants_to_review)
                 break
             elif choice == 3:
                 print("Thank you for using the Restaurant Recommendation Engine. Goodbye!")
@@ -102,45 +103,43 @@ def post_recommendation_menu():
         except ValueError:
             print("\nPlease enter a valid number.")
 
-def add_review():
-    """Add a review to a selected restaurant and update its rating."""
+def add_review(restaurants_to_review=None):
+    """
+    Add a review to a selected restaurant and update its rating.
+    """
+    if restaurants_to_review is None:
+        restaurants_to_review = restaurant_list
 
-    while True:  # Loop to keep asking for a valid restaurant choice
-        try:
-            choice = int(input("Choose a restaurant to review: ")) # Capture the user's choice for the restaurant to review.
-            if 1 <= choice <= len(restaurant_list):
-                restaurant = restaurant_list[choice - 1]
-                break  # Exit the loop as a valid restaurant has been chosen
-            else:
-                print("\nInvalid choice.")
-        except ValueError:
-            print("\nPlease enter a valid number.")
-    try:
-        rating = float(input("Your rating (1-5): ")) # Capture the user's rating.
-        if 1 <= rating <= 5:
-            review_text = input("Your review: ")
-            sanitized_review = sanitize_text(review_text)
-            new_review = {"rating": rating, "text": sanitized_review}
-            restaurant['reviews'].append(new_review)
-        else:
-            print("\nInvalid rating. Must be between 1 and 5.")
-            return
-    except ValueError:
-        print("\nPlease enter a valid rating.")
-        return
-
-    restaurant['rating'] = update_average_rating(restaurant)
+    restaurant_choice = get_valid_choice("Choose a restaurant to review: ", 1, len(restaurants_to_review))
+    restaurant = restaurants_to_review[restaurant_choice - 1]
+    
+    capture_and_add_review(restaurant)
+    
     update_restaurant_data(restaurant, restaurant_data)
-    save_to_json(restaurant_data, data_file_path)  # Save the updated data back to JSON file
+    save_to_json(restaurant_data, data_file_path)
 
-def search_restaurants():
-    '''
-    Implement search by name, cuisine, or location.
-    Extend Binary Search to include search by reviews,
-    like finding all restaurants with reviews containing the word "excellent".
-    '''
-    pass
-
+def search_menu():
+    """ Displays the search menu and handles the user's choice."""
+    while True:
+        print("You can search restaurants by:")
+        print("1. Cuisine")
+        print("2. Go back to main menu")
+        
+        try:
+            choice = int(input("Your choice: "))
+            if choice in [1, 2]:
+                if choice == 1:
+                    filtered_list = handle_cuisine_search(restaurant_list)  # Call the handler function for cuisine search
+                    # Assuming search_results contain the filtered list of restaurants
+                    post_menu(filtered_list)
+                elif choice == 2:
+                    main_menu()
+                break
+            else:
+                print("Invalid choice. Please try again.")
+        except ValueError:
+            print("Please enter a valid number.")
+    
 
 if __name__ == "__main__":
     restaurant_list, restaurant_data, data_file_path = load_and_convert_data_to_list()

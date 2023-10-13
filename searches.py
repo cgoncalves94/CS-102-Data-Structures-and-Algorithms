@@ -1,5 +1,7 @@
-#Binary Search
-def binary_search(array, target):
+# Binary Search for list of dictionaries
+def binary_search(array, target, key):
+    """Perform a binary search on a sorted list of dictionaries."""
+
     low = 0  # Initialize the low pointer
     high = len(array) - 1  # Initialize the high pointer
     
@@ -8,11 +10,11 @@ def binary_search(array, target):
         mid = (low + high) // 2  # Compute the mid-point index
 
         # If the target is found, return its index
-        if array[mid] == target:
+        if array[mid][key] == target:
             return mid
         # If the mid-point value is less than the target,
         # move the low pointer to the right of mid-point
-        elif array[mid] < target:
+        elif array[mid][key] < target:
             low = mid + 1
         # If the mid-point value is greater than the target,
         # move the high pointer to the left of mid-point

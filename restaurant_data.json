@@ -15,11 +15,19 @@
         "name": "Osteria Francescana",
         "cuisine": "Italian",
         "location": "Modena, Italy",
-        "rating": 5.0,
+        "rating": 4.6,
         "reviews": [
             {
                 "rating": 5.0,
                 "text": "Absolutely stunning! A must-visit."
+            },
+            {
+                "rating": 4.8,
+                "text": "Buonissimo!"
+            },
+            {
+                "rating": 4.1,
+                "text": "I loved it! mama mia"
             }
         ]
     },
@@ -27,11 +35,15 @@
         "name": "El Celler de Can Roca",
         "cuisine": "Spanish",
         "location": "Girona, Spain",
-        "rating": 4.2,
+        "rating": 4.1,
         "reviews": [
             {
                 "rating": 4.2,
                 "text": "Great food but service could be better."
+            },
+            {
+                "rating": 4.0,
+                "text": "Muy bueno!"
             }
         ]
     },
@@ -48,6 +60,10 @@
             {
                 "rating": 3.0,
                 "text": "English food a bit tasteless"
+            },
+            {
+                "rating": 4.0,
+                "text": "The food improved a lot."
             }
         ]
     },
@@ -55,7 +71,7 @@
         "name": "Steirereck",
         "cuisine": "Austrian",
         "location": "Vienna, Austria",
-        "rating": 4.5,
+        "rating": 4.2,
         "reviews": [
             {
                 "rating": 4.5,
@@ -112,14 +128,70 @@
         ]
     },
     "10": {
-        "name": "Frantz\u00e9n",
-        "cuisine": "Swedish",
-        "location": "Stockholm, Sweden",
+        "name": "Zia Lucia",
+        "cuisine": "Italian",
+        "location": "London, England",
+        "rating": 4.4,
+        "reviews": [
+            {
+                "rating": 4.8,
+                "text": "The best pizza!"
+            },
+            {
+                "rating": 4.0,
+                "text": "Service was good!"
+            }
+        ]
+    },
+    "11": {
+        "name": "La Pergola",
+        "cuisine": "Italian",
+        "location": "Rome, Italy",
         "rating": 4.5,
         "reviews": [
             {
                 "rating": 4.5,
-                "text": "Amazing experience, will definitely return!"
+                "text": "Delightful experience."
+            }
+        ]
+    },
+    "12": {
+        "name": "Belcanto",
+        "cuisine": "Portuguese",
+        "location": "Lisbon, Portugal",
+        "rating": 4.3,
+        "reviews": [
+            {
+                "rating": 4.3,
+                "text": "A taste of Portugal."
+            }
+        ]
+    },
+    "13": {
+        "name": "L'Amour",
+        "cuisine": "French",
+        "location": "Lyon, France",
+        "rating": 4.6,
+        "reviews": [
+            {
+                "rating": 4.2,
+                "text": "French passion."
+            }
+        ]
+    },
+    "14": {
+        "name": "Mugaritz",
+        "cuisine": "Spanish",
+        "location": "San Sebasti\u00e1n, Spain",
+        "rating": 4.5,
+        "reviews": [
+            {
+                "rating": 4.1,
+                "text": "Innovative and surprising."
+            },
+            {
+                "rating": 5.0,
+                "text": "WOW!"
             }
         ]
     }
