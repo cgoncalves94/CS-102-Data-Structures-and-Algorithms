@@ -21,7 +21,7 @@ To run this application, you need Python 3.12 installed. If you don't have Pytho
 
 1. Clone this repository by copying the URL and using it with your preferred Git client.
 2. Navigate to the directory containing the `app.py` file.
-3. To run the application, execute `python app.py` in the terminal.
+3. To run the application, execute `python3 app.py` in the terminal.
 
 ## Features and Objectives
 
