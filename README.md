@@ -1,8 +1,8 @@
-# Restaurant Recommendation Engine
+# Restaurant Recommendation
 
 ## Introduction
 
-Welcome to my portfolio project for CS 102: Data Structures and Algorithms! In this project, I've developed a Restaurant Recommendation Engine. This console-based application sorts and searches restaurant data to provide personalized recommendations. The restaurant data is stored in and retrieved from a JSON file. The application features algorithms for sorting by ratings and searching by cuisine or location.
+Welcome to my portfolio project for CS 102: Data Structures and Algorithms! In this project, I've developed a Restaurant Recommendation. This console-based application sorts and searches restaurant data to provide personalized recommendations. The restaurant data is stored in and retrieved from a JSON file. The application features algorithms for sorting by ratings and searching by cuisine or location.
 
 ## How To Use
 
